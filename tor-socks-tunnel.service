@@ -1,0 +1,25 @@
+[Unit]
+Description=Tor tunnel device
+After=tor.service
+BindsTo=tor.service
+Documentation=man:tor
+
+[Service]
+Type=exec
+Environment='TUN_DEV=tor-tunnel' 'TUN_IP=10.0.15.1' 'APP_IP=10.0.15.2' 'TOR_SOCKS=127.0.0.1:9050'
+KillMode=process
+
+ExecStartPre=ip tuntap add ${TUN_DEV} mode tun
+ExecStartPre=ip addr add ${TUN_IP}/24 dev ${TUN_DEV}
+ExecStartPre=ip link set ${TUN_DEV} up
+
+ExecStart=badvpn-tun2socks \
+	--tundev ${TUN_DEV} \
+	--netif-ipaddr ${APP_IP} \
+	--netif-netmask 255.255.255.0 \
+	--socks-server-addr ${TOR_SOCKS}
+
+ExecStopPost=ip link del ${TUN_DEV}
+
+[Install]
+WantedBy=default.target
