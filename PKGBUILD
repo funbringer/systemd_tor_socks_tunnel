@@ -9,7 +9,7 @@ url="https://github.com/funbringer/systemd_tor_socks_tunnel"
 license=('MIT')
 depends=('tor' 'badvpn' 'systemd')
 source=('tor-socks-tunnel.service')
-sha256sums=('b077e09e8171f52b76ec19f0a2bbab9d9bc183a2989af1ef1ca443aa6b66f599')
+sha256sums=('206bba8df826854c8c1c5a4850d900120b4dc83f5c1477279961c68671de47ed')
 
 package() {
 	install -m 755 -d $pkgdir/etc/systemd/system/

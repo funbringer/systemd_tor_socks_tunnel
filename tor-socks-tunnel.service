@@ -1,6 +1,6 @@
 [Unit]
 Description=Tor tunnel device
-After=tor.service
+After=network-online.target tor.service
 BindsTo=tor.service
 Documentation=man:tor
 
@@ -22,4 +22,4 @@ ExecStart=badvpn-tun2socks \
 ExecStopPost=ip link del ${TUN_DEV}
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
