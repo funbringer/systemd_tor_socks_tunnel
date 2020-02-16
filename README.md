@@ -4,8 +4,7 @@ Usage:
 
 ```bash
 # Install everything
-$ makepkg -s
-$ sudo pacman -Syu tor badvpn
+$ makepkg -si
 $ sudo systemctl enable tor-socks-tunnel --now
 
 # Add some routes
